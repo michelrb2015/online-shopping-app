@@ -1,0 +1,35 @@
+OnlineShoppingApp/
+│
+├── src/
+│   ├── OnlineShoppingApp.Api/            (Capa de Presentación)
+│   │   ├── Controllers/                  (Controladores de la API)
+│   │   └── DTOs/                         (Objetos de transferencia de datos)
+│   │
+│   ├── OnlineShoppingApp.Application/    (Capa de Aplicación)
+│   │   ├── Commands/                     (Comandos de la aplicación)
+│   │   │   └── Handlers/                 (Manejadores de comandos)
+│   │   │
+│   │   ├── Queries/                      (Consultas de la aplicación)
+│   │   │   └── Handlers/                 (Manejadores de consultas)
+│   │   │
+│   │   ├── Mappers/                      (Mapeadores de DTOs y entidades)
+│   │   └── OnlineShoppingApp.Application.csproj
+│   │
+│   ├── OnlineShoppingApp.Domain/         (Capa de Dominio)
+│   │   ├── Entities/                     (Entidades del dominio)
+│   │   ├── ValueObjects/                 (Objetos de valor del dominio)
+│   │   ├── Aggregates/                   (Agregados del dominio)
+│   │   └── Repositories/                 (Interfaces de repositorios)
+│   │
+│   ├── OnlineShoppingApp.Infrastructure/ (Capa de Infraestructura)
+│   │   ├── Persistence/                  (Acceso a datos)
+│   │   │   ├── Contexts/                 (Contextos de base de datos)
+│   │   │   └── Repositories/             (Implementación de repositorios)
+│   │   │
+│   │   └── ExternalServices/             (Servicios externos)
+│   │
+│   └── OnlineShoppingApp.Tests/          (Pruebas)
+│       ├── UnitTests/                    (Pruebas unitarias)
+│       └── IntegrationTests/             (Pruebas de integración)
+│
+└── OnlineShoppingApp.sln                 (Solución del proyecto)
