@@ -24,7 +24,7 @@ namespace OnlineShoppingApp.Application.Queries.Handlers
                     Id = product.Id,
                     Name = product.Name,
                     Description = product.Description,
-                    Price = product.Price.Amount,
+                    Price = product.Price,
                     Quantity = product.Quantity
                 });
             }

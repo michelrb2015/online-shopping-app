@@ -1,6 +1,5 @@
 ﻿using OnlineShoppingApp.Application.Commands.Dtos;
 using OnlineShoppingApp.Domain.Entities;
-using OnlineShoppingApp.Domain.ValueObjects;
 
 namespace OnlineShoppingApp.Application.Mappers
 {
@@ -12,7 +11,7 @@ namespace OnlineShoppingApp.Application.Mappers
             {
                 Name = dto.Name,
                 Description = dto.Description,
-                Price = new Price(dto.Price, "USD"),
+                Price = dto.Price,
                 Quantity = dto.Quantity
             };
         }

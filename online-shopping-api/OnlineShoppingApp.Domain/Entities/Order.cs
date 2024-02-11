@@ -1,16 +1,20 @@
 ﻿
-namespace OnlineShoppingApp.Domain
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace OnlineShoppingApp.Domain.Entities
 {
     // Order Entity
     public class Order
     {
-        public int UserId { get; private set; }
-        public List<int> Products { get; private set; }
-
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public ICollection<OrderProduct> OrderProducts { get; set; }
         public Order(int userId, List<int> products)
         {
             UserId = userId;
-            Products = products;
+            OrderProducts = products.Select(productId => new OrderProduct { ProductId = productId }).ToList();
         }
+
+        public Order() { }
     }
 }

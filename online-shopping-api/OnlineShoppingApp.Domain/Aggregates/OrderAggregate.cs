@@ -17,10 +17,16 @@ namespace OnlineShoppingApp.Domain.Aggregates
             Order = order;
         }
 
+
         public void AddProduct(Product product)
         {
             _products.Add(product);
         }
 
+        public static OrderAggregate CreateFromOrder(Order order)
+        {
+            var orderAggregate = new OrderAggregate(order);
+            return orderAggregate;
+        }
     }
 }
