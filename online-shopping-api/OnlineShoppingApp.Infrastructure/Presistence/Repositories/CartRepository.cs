@@ -2,11 +2,6 @@
 using OnlineShoppingApp.Domain.Entities;
 using OnlineShoppingApp.Domain.Repositories;
 using OnlineShoppingApp.Infrastructure.Presistence.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineShoppingApp.Infrastructure.Presistence.Repositories
 {
@@ -27,7 +22,7 @@ namespace OnlineShoppingApp.Infrastructure.Presistence.Repositories
 
             if (cart == null)
             {
-                cart = new CartItems { UserId = userId, Items = new List<CartItem>() };
+                cart = new Cart { UserId = userId, Items = new List<CartItem>() };
                 _context.Carts.Add(cart);
             }
 
@@ -44,6 +39,16 @@ namespace OnlineShoppingApp.Infrastructure.Presistence.Repositories
 
             await _context.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<IEnumerable<CartItem>> GetCartItemsAsync(int userId)
+        {
+            var cartItems = await _context.CartItems
+                .Where(ci => ci.UserId == userId)
+                .Include(c => c.Product)
+                .ToListAsync();
+
+            return cartItems;
         }
     }
 

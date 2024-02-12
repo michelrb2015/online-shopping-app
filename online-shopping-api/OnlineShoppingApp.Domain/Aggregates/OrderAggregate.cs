@@ -22,11 +22,5 @@ namespace OnlineShoppingApp.Domain.Aggregates
         {
             _products.Add(product);
         }
-
-        public static OrderAggregate CreateFromOrder(Order order)
-        {
-            var orderAggregate = new OrderAggregate(order);
-            return orderAggregate;
-        }
     }
 }

@@ -9,12 +9,6 @@ namespace OnlineShoppingApp.Domain.Entities
         public int Id { get; set; }
         public int UserId { get; set; }
         public ICollection<OrderProduct> OrderProducts { get; set; }
-        public Order(int userId, List<int> products)
-        {
-            UserId = userId;
-            OrderProducts = products.Select(productId => new OrderProduct { ProductId = productId }).ToList();
-        }
 
-        public Order() { }
     }
 }

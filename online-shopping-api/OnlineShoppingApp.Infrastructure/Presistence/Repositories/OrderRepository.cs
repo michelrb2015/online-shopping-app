@@ -19,26 +19,25 @@ namespace OnlineShoppingApp.Infrastructure.Presistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<bool> AddAsync(OrderAggregate orderAggregate)
+        public async Task<bool> AddAsync(int userId, List<int> products)
         {
             try
             {
-                var order = orderAggregate.Order;
                 var orderEntity = new Order
                 {
-                    UserId = order.UserId,
+                    UserId = userId,
                 };
 
                 _dbContext.Orders.Add(orderEntity);
 
                 await _dbContext.SaveChangesAsync();
 
-                foreach (var product in orderAggregate.Products)
+                foreach (var prodId in products)
                 {
                     var orderProduct = new OrderProduct
                     {
                         OrderId = orderEntity.Id,
-                        ProductId = product.Id,
+                        ProductId = prodId,
                     };
 
                     _dbContext.OrderProducts.Add(orderProduct);
