@@ -1,4 +1,5 @@
-﻿using OnlineShoppingApp.Domain.Repositories;
+﻿using OnlineShoppingApp.Domain.Entities;
+using OnlineShoppingApp.Domain.Repositories;
 
 namespace OnlineShoppingApp.API.Commands.Services
 {
@@ -11,7 +12,7 @@ namespace OnlineShoppingApp.API.Commands.Services
             _userRepository = userRepository;
         }
 
-        public async Task<bool> LoginAsync(string username, string password)
+        public async Task<User?> LoginAsync(string username, string password)
         {
             return await _userRepository.LoginAsync(username, password);
         }

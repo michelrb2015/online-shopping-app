@@ -63,10 +63,10 @@ namespace OnlineShoppingApp.Infrastructure.Presistence.Repositories
             return true;
         }
 
-        public async Task<bool> LoginAsync(string username, string password)
+        public async Task<User?> LoginAsync(string username, string password)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
-            return user != null; 
+            return user; 
         }
     }
 

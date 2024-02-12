@@ -1,7 +1,9 @@
-﻿namespace OnlineShoppingApp.API.Commands.Handlers
+﻿using OnlineShoppingApp.Domain.Entities;
+
+namespace OnlineShoppingApp.API.Commands.Handlers
 {
     public interface ILoginUserCommandHandler
     {
-        Task<bool> HandleAsync(LoginUserCommand command);
+        Task<User?> HandleAsync(LoginUserCommand command);
     }
 }

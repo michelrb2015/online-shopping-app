@@ -9,6 +9,6 @@ namespace OnlineShoppingApp.Domain.Repositories
         Task UpdateAsync(User user);
         Task DeleteAsync(User user);
         Task<bool> RegisterUserAsync(string username, string email, string password);
-        Task<bool> LoginAsync(string username, string password);
+        Task<User?> LoginAsync(string username, string password);
     }
 }

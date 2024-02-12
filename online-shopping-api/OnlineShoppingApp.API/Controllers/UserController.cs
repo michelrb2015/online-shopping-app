@@ -54,9 +54,13 @@ namespace OnlineShoppingApp.API.Controllers
 
             var loginResult = await _mediator.Send(loginCommand);
 
-            if (loginResult)
+            if (loginResult is not null)
             {
-                return Ok(new { Message = "Login successful" });
+                return Ok(new {
+                    Id = loginResult.Id,
+                    Username = loginResult.Username,
+                    Email = loginResult.Email
+                });
             }
             else
             {
