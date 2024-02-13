@@ -1,0 +1,47 @@
+/src
+├── /app
+│   ├── /auth
+│   │   ├── auth.module.ts
+│   │   ├── login.component.ts
+│   │   ├── login.component.html
+│   │   ├── register.component.ts
+│   │   ├── register.component.html
+│   │   ├── auth.service.ts
+│   │   └── auth.guard.ts
+│   ├── /catalog
+│   │   ├── catalog.module.ts
+│   │   ├── product-list.component.ts
+│   │   ├── product-list.component.html
+│   │   ├── product-details.component.ts
+│   │   ├── product-details.component.html
+│   │   └── catalog.service.ts
+│   ├── /cart
+│   │   ├── cart.module.ts
+│   │   ├── cart.component.ts
+│   │   ├── cart.component.html
+│   │   └── cart.component.css
+│   ├── /shared
+│   │   ├── /models
+│   │   │   └── product.model.ts
+│   │   └── /services
+│   │       └── cart.service.ts
+│   ├── /ngrx
+│   │   ├── /reducers
+│   │   │   ├── auth.reducer.ts
+│   │   │   ├── cart.reducer.ts
+│   │   │   └── index.ts
+│   │   ├── /actions
+│   │   │   ├── auth.actions.ts
+│   │   │   ├── cart.actions.ts
+│   │   │   └── index.ts
+│   │   └── /effects
+│   │       ├── auth.effects.ts
+│   │       ├── cart.effects.ts
+│   │       └── index.ts
+│   ├── app.component.ts
+│   ├── app.component.html
+│   ├── app.component.css
+│   ├── app.module.ts
+│   └── app-routing.module.ts
+├── /assets
+└── ...
