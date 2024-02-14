@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   isLoggedIn$: Observable<boolean> | undefined;
   errorMessage$: Observable<string | null> | undefined;
   isLoggedInSubscription$: Subscription | undefined;
+  errorMessageSubscription$: Subscription | undefined;
 
   constructor(
     private store: Store<AppState>,
@@ -69,16 +70,19 @@ export class LoginComponent implements OnInit, OnDestroy {
       );
     }
 
-    this.store
-    .select((state) => state.auth.error)
-    .subscribe((err) => {
-      if(err) {
-        this._snackBar.openFromComponent(SnackbarErrorComponent, {
-          duration: 2000,
-          data: err
-        });
-      }
-    });
+    this.errorMessage$ = this.store.select((state) => state.auth.error);
+
+    if(this.errorMessage$) {
+      this.errorMessageSubscription$ = this.errorMessage$.subscribe((err) => {
+        if(err) {
+          this._snackBar.openFromComponent(SnackbarErrorComponent, {
+            duration: 2000,
+            data: err
+          });
+        }
+      });
+    }
+
   }
 
   onSubmit(): void {
@@ -87,10 +91,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   goToRegister() {
+    this.store.dispatch(AuthActions.registerClean())
     this.router.navigate(['register']);
   }
 
   ngOnDestroy(): void {
     this.isLoggedInSubscription$?.unsubscribe();
+    this.errorMessageSubscription$?.unsubscribe();
   }
 }

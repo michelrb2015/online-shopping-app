@@ -7,12 +7,16 @@ import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
 import * as Reducers from './store/reducers';
-import { AuthEffects} from './store/effects/auth.effect';
+import { AuthEffects } from './store/effects/auth.effect';
 import { CartEffects } from './store/effects/cart.effect';
 import { ProductEffects } from './store/effects/product.effect';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimationsAsync(),
+  providers: [
+    provideRouter(routes),
+    provideAnimationsAsync(),
+    provideHttpClient(),
     provideStore(Reducers.reducers),
     provideEffects(AuthEffects, CartEffects, ProductEffects),
     provideStoreDevtools({
@@ -21,5 +25,6 @@ export const appConfig: ApplicationConfig = {
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
       trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
-    }),]
+    }),
+  ],
 };

@@ -33,11 +33,11 @@ namespace OnlineShoppingApp.API.Controllers
 
             if (loginResult is true)
             {
-                return Ok("User registered successfully.");
+                return Ok(new { Message = "User registered successfully." });
             }
             else
             {
-                return BadRequest("Failed to register user.");
+                return BadRequest(new { Message = "Failed to register user" });
             }
 
         }

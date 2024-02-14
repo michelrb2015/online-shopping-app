@@ -81,6 +81,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
     const { username, password, email } = this.registerForm?.value;
     this.store.dispatch(AuthActions.register({ username, email, password }));
   }
+  goToLogin() {
+    this.router.navigate(['login']);
+  }
 
   ngOnDestroy(): void {
     this.isRegisterSubscription$?.unsubscribe();

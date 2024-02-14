@@ -1,20 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
 
-  constructor() { }
+  baseAuthUrl = 'http://localhost:5212/api/user'
+  constructor(private http$: HttpClient) { }
 
-  login(username: string, password: string): Observable<number> {
-    if (username === 'admin' && password === 'admin') {
-      return of(1);
-    } else {
-      return throwError(()=> new Error('Invalid username or password'));
-    }
+  login(username: string, password: string): Observable<any> {
+    return this.http$.post(`${this.baseAuthUrl}/login`, { username, password}).pipe(
+      map((response: any)=> response.id),
+      catchError(err=>{
+        return throwError(()=> new Error(err.error.message));
+      })
+    );
   }
 
   logout(): Observable<boolean> {
@@ -22,10 +24,14 @@ export class AuthService {
   }
 
   register(username: string, email: string, password: string): Observable<boolean> {
-    if (username !== 'admin' && email !== 'admin') {
-      return of(true);
-    } else {
-      return throwError(()=> new Error('User already exists'));
-    }
+    return this.http$.post(`${this.baseAuthUrl}/register`, { username, email, password}).pipe(
+      map((response: any)=> {
+        console.log(response)
+        return true;
+      }),
+      catchError(err=>{
+        return throwError(()=> new Error(err.error.message));
+      })
+    );
   }
 }
