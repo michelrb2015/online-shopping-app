@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  FormControl,
   FormGroup,
   FormsModule,
   NonNullableFormBuilder,
@@ -16,14 +15,14 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/reducers';
 import * as AuthActions from '../../store/actions/auth.action';
 import { Observable, Subscription } from 'rxjs';
-import { isLoggedIn } from '../../store/selectors';
+import { isRegistered } from '../../store/selectors';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { SnackbarErrorComponent } from '../../shared/snackbar-error/snackbar-error.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -34,21 +33,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-
-    SnackbarErrorComponent,
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss',
 })
-export class LoginComponent implements OnInit, OnDestroy {
-  loginForm: FormGroup = this.fb.group({
+export class RegisterComponent implements OnInit, OnDestroy {
+  registerForm: FormGroup = this.fb.group({
     username: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
 
-  isLoggedIn$: Observable<boolean> | undefined;
-  errorMessage$: Observable<string | null> | undefined;
-  isLoggedInSubscription$: Subscription | undefined;
+  isRegistered$: Observable<boolean> | undefined;
+  isRegisterSubscription$: Subscription | undefined;
 
   constructor(
     private store: Store<AppState>,
@@ -58,39 +55,34 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this.store.select(isLoggedIn);
-    if (this.isLoggedIn$) {
-      this.isLoggedInSubscription$ = this.isLoggedIn$.subscribe(
-        (isLoggedIn) => {
-          if (isLoggedIn) {
-            this.router.navigate(['products']);
+    this.isRegistered$ = this.store.select(isRegistered);
+    if (this.isRegistered$) {
+      this.isRegisterSubscription$ = this.isRegistered$.subscribe(
+        (isRegistered) => {
+          if (isRegistered) {
+            this.router.navigate(['login']);
           }
         }
       );
     }
-
     this.store
-    .select((state) => state.auth.error)
-    .subscribe((err) => {
-      if(err) {
-        this._snackBar.openFromComponent(SnackbarErrorComponent, {
-          duration: 2000,
-          data: err
-        });
-      }
-    });
+      .select((state) => state.auth.error)
+      .subscribe((err) => {
+        if (err) {
+          this._snackBar.openFromComponent(SnackbarErrorComponent, {
+            duration: 2000,
+            data: err,
+          });
+        }
+      });
   }
 
   onSubmit(): void {
-    const { username, password } = this.loginForm?.value;
-    this.store.dispatch(AuthActions.login({ username, password }));
-  }
-
-  goToRegister() {
-    this.router.navigate(['register']);
+    const { username, password, email } = this.registerForm?.value;
+    this.store.dispatch(AuthActions.register({ username, email, password }));
   }
 
   ngOnDestroy(): void {
-    this.isLoggedInSubscription$?.unsubscribe();
+    this.isRegisterSubscription$?.unsubscribe();
   }
 }

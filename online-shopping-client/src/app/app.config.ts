@@ -9,11 +9,12 @@ import { provideEffects } from '@ngrx/effects';
 import * as Reducers from './store/reducers';
 import { AuthEffects} from './store/effects/auth.effect';
 import { CartEffects } from './store/effects/cart.effect';
+import { ProductEffects } from './store/effects/product.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(),
     provideStore(Reducers.reducers),
-    provideEffects(AuthEffects, CartEffects),
+    provideEffects(AuthEffects, CartEffects, ProductEffects),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode

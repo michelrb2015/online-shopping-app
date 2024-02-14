@@ -1,19 +1,15 @@
 /src
 ├── /app
 │   ├── /auth
-│   │   ├── auth.module.ts
 │   │   ├── login.component.ts
 │   │   ├── login.component.html
 │   │   ├── register.component.ts
 │   │   ├── register.component.html
-│   │   ├── auth.service.ts
-│   │   └── auth.guard.ts
-│   ├── /catalog
-│   │   ├── catalog.module.ts
+│   │   └── auth.service.ts
+│   │   
+│   ├── /products
 │   │   ├── product-list.component.ts
 │   │   ├── product-list.component.html
-│   │   ├── product-details.component.ts
-│   │   ├── product-details.component.html
 │   │   └── catalog.service.ts
 │   ├── /cart
 │   │   ├── cart.module.ts
@@ -23,9 +19,9 @@
 │   ├── /shared
 │   │   ├── /models
 │   │   │   └── product.model.ts
-│   │   └── /services
-│   │       └── cart.service.ts
-│   ├── /ngrx
+│   │   └── /snackbar-error
+│   │       └── snackbar-error.component.ts
+│   ├── /store
 │   │   ├── /reducers
 │   │   │   ├── auth.reducer.ts
 │   │   │   ├── cart.reducer.ts
@@ -33,6 +29,10 @@
 │   │   ├── /actions
 │   │   │   ├── auth.actions.ts
 │   │   │   ├── cart.actions.ts
+│   │   │   └── index.ts
+│   │   ├── /selector
+│   │   │   ├── auth.selector.ts
+│   │   │   ├── cart.selector.ts
 │   │   │   └── index.ts
 │   │   └── /effects
 │   │       ├── auth.effects.ts

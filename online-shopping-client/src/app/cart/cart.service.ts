@@ -19,7 +19,7 @@ export class CartService {
 
   }
 
-  removeFromCart(productId: string): Observable<any> {
+  removeFromCart(productId: number): Observable<any> {
     const currentCartItems = this.cartItemsSubject.getValue();
     const updatedCartItems = currentCartItems.filter(item => item.id !== productId);
     this.cartItemsSubject.next(updatedCartItems);

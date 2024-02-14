@@ -7,3 +7,8 @@ export const isLoggedIn = createSelector(
   selectAuth,
   (auth) => auth.isLoggedIn
 );
+
+export const isRegistered = createSelector(
+  selectAuth,
+  (auth) => auth.isRegistered
+);

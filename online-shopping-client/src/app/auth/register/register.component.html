@@ -1,16 +1,27 @@
-<div class="login-container">
+<div class="register-container">
   <mat-card class="card" width=300>
     <mat-card-header>
-      <mat-card-subtitle>Sign In</mat-card-subtitle>
-      <mat-card-title>Welcome</mat-card-title>
+      <mat-card-subtitle>Sign Up</mat-card-subtitle>
+      <mat-card-title>User info</mat-card-title>
     </mat-card-header>
     <mat-card-content class="content">
-      <form class="login-form" [formGroup]="loginForm" (submit)="onSubmit()">
+      <form class="register-form" [formGroup]="registerForm" (submit)="onSubmit()">
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Username</mat-label>
           <input
             matInput
             formControlName="username"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            name="email"
             required
           />
         </mat-form-field>
@@ -26,23 +37,19 @@
           />
         </mat-form-field>
 
-        <div class="error-message">
-          <span>{{errorMessage$ | async}}</span>
-        </div>
-
         <button
           mat-raised-button
           color="primary"
           type="submit"
           class="full-width"
         >
-          Login
+          Register
         </button>
       </form>
       <mat-divider></mat-divider>
 
       <div class="register-link">
-        <a mat-button (click)="goToRegister()">Register</a>
+        <a mat-button routerLink="/login">Back</a>
       </div>
     </mat-card-content>
   </mat-card>

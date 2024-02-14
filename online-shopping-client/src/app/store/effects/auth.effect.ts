@@ -25,4 +25,16 @@ export class AuthEffects {
     )
   ));
 
+  register$ = createEffect(() => this.actions$.pipe(
+    ofType(AuthActions.register),
+    switchMap(({ username, email, password }) =>
+      this.authService.register(username, email, password).pipe(
+        map(() => {
+          return AuthActions.registerSuccess()
+        }),
+        catchError(error => of(AuthActions.registerFailure({ error })))
+      )
+    )
+  ));
+
 }

@@ -18,6 +18,14 @@ export class AuthService {
   }
 
   logout(): Observable<boolean> {
-    return of(true).pipe(delay(1000));
+    return of(true);
+  }
+
+  register(username: string, email: string, password: string): Observable<boolean> {
+    if (username !== 'admin' && email !== 'admin') {
+      return of(true);
+    } else {
+      return throwError(()=> new Error('User already exists'));
+    }
   }
 }

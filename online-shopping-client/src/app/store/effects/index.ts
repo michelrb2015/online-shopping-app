@@ -1,2 +1,3 @@
-export * from './auth.selector';
-export * from './cart.selector';
+export * from './auth.effect';
+export * from './cart.effect';
+export * from './product.effect';

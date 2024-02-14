@@ -1,4 +1,4 @@
-.login-container {
+.register-container {
   height: 100%;
   width: 100%;
   display: flex;
@@ -14,13 +14,9 @@
       gap: 15px;
       padding-top: 16px;
 
-      .login-form {
+      .register-form {
         display: flex;
         flex-direction: column;
-
-        .error-message {
-          color: red;
-        }
       }
     }
   }
