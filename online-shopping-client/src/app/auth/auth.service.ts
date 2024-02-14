@@ -9,9 +9,9 @@ export class AuthService {
 
   constructor() { }
 
-  login(username: string, password: string): Observable<boolean> {
+  login(username: string, password: string): Observable<number> {
     if (username === 'admin' && password === 'admin') {
-      return of(true);
+      return of(1);
     } else {
       return throwError(()=> new Error('Invalid username or password'));
     }

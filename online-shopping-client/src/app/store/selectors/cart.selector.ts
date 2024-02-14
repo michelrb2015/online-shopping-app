@@ -5,12 +5,22 @@ const selectCart = (state: AppState) => state.cart;
 
 export const selectCartItems = createSelector(
   selectCart,
-  (cart) => cart.items
+  (cart) => cart.products
 );
 
 export const selectCartTotal = createSelector(
   selectCartItems,
-  (items) => {
-    return items.reduce((total, item) => total + item.price, 0);
+  (products) => {
+    return products.reduce((total, item) => total + item.price, 0);
   }
+);
+
+export const selectCartLoading = createSelector(
+  selectCart,
+  state => state.loading
+);
+
+export const selectCartError = createSelector(
+  selectCart,
+  state => state.error
 );

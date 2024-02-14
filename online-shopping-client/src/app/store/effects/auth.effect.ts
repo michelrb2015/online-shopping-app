@@ -17,8 +17,8 @@ export class AuthEffects {
     ofType(AuthActions.login),
     switchMap(({ username, password }) =>
       this.authService.login(username, password).pipe(
-        map(() => {
-          return AuthActions.loginSuccess()
+        map((userId) => {
+          return AuthActions.loginSuccess({ userId })
         }),
         catchError(error => of(AuthActions.loginFailure({ error })))
       )

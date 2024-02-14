@@ -32,5 +32,15 @@ export class CartEffects {
       )
     )
   ), { dispatch: false });
+
+  loadCartItems$ = createEffect(() => this.actions$.pipe(
+    ofType(CartActions.loadCartItems),
+    switchMap(({ userId }) =>
+      this.cartService.getCartItems(userId).pipe(
+        map(products => CartActions.loadCartItemsSuccess({ products })),
+        catchError(error => of(CartActions.loadCartItemsFailure({ error })))
+      )
+    )
+  ));
 }
 
