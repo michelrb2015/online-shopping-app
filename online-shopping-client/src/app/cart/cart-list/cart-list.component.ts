@@ -49,6 +49,10 @@ export class CartListComponent implements OnDestroy {
     this.router.navigate(['products']);
   }
 
+  placeOrder() {
+    this.store.dispatch(CartActions.placeOrder({userId: this.userId}));
+  }
+
   ngOnDestroy(): void {
     this.userIdSubscription$?.unsubscribe()
   }

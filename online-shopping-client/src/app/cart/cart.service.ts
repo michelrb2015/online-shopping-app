@@ -11,6 +11,7 @@ export class CartService {
   public cartItems$: Observable<Product[]> = this.cartItemsSubject.asObservable();
 
   baseCartUrl = 'http://localhost:5212/api/cart'
+  baseOrderUrl = 'http://localhost:5212/api/order/place-order'
 
   constructor(private http$: HttpClient) { }
 
@@ -35,6 +36,15 @@ export class CartService {
   getCartItems(userId: number): Observable<Product[]> {
     return this.http$.get(`${this.baseCartUrl}/${userId}`).pipe(
       map((response: any)=> response),
+      catchError(err=>{
+        return throwError(()=> new Error(err.error.message));
+      })
+    );
+  }
+
+  placeOrder(userId: number): Observable<any> {
+    return this.http$.post(`${this.baseOrderUrl}`, { userId }).pipe(
+      map((response: any)=> console.log(response)),
       catchError(err=>{
         return throwError(()=> new Error(err.error.message));
       })

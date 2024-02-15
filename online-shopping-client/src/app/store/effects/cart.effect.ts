@@ -42,5 +42,15 @@ export class CartEffects {
       )
     )
   ));
+
+  placeOrder$ = createEffect(() => this.actions$.pipe(
+    ofType(CartActions.placeOrder),
+    switchMap(({ userId }) =>
+      this.cartService.placeOrder(userId).pipe(
+        map(() => console.log('Must pay')),
+        catchError(error => of(console.error(error)))
+      )
+    )
+  ), { dispatch: false });
 }
 

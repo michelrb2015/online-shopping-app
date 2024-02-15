@@ -39,11 +39,11 @@ namespace OnlineShoppingApp.API.Controllers
                 var placeOrderResult = await _mediator.Send(placeOrderCommand);
                 if (placeOrderResult)
                 {
-                    return Ok("Order placed successfully.");
+                    return Ok( new { Message = "Order placed successfully." });
                 }
                 else
                 {
-                    return BadRequest("Failed to place order.");
+                    return BadRequest(new { Message = "Failed to place order." });
                 }
             }
             catch (Exception ex)

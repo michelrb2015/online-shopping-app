@@ -39,8 +39,8 @@ export class ProductListComponent implements OnInit {
       this.userId = userId;
     })
 
-    this.store.dispatch(ProductActions.loadProducts())
     this.refreshCart()
+    this.store.dispatch(ProductActions.loadProducts())
   }
 
   addToCart(product: Product) {

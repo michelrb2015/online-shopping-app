@@ -16,8 +16,6 @@ namespace OnlineShoppingApp.API.Commands.Handlers
 
         public async Task<bool> Handle(PlaceOrderCommand command, CancellationToken cancellationToken)
         {
-            //var order = new Order(command.UserId, command.Products);
-            //var orderAggregate = OrderAggregate.CreateFromOrder(order);
             return await _orderService.AddOrderAsync(command.UserId, command.Products);
         }
     }
