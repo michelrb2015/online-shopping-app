@@ -18,11 +18,11 @@ const cartReducer = createReducer(
   initialState,
   on(CartActions.addToCart, (state, { product }) => ({
     ...state,
-    items: [...state.products, product]
+    products: [...state.products, product]
   })),
-  on(CartActions.removeFromCart, (state, { productId }) => ({
+  on(CartActions.removeFromCart, (state, { product }) => ({
     ...state,
-    items: state.products.filter(item => item.id !== productId)
+    products: state.products.filter(item => item.id !== product.id)
   })),
   on(CartActions.loadCartItems, state => ({ ...state, loading: true })),
   on(CartActions.loadCartItemsSuccess, (state, { products }) => ({ ...state, products, loading: false, error: null })),

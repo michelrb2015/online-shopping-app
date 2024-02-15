@@ -41,6 +41,27 @@ namespace OnlineShoppingApp.Infrastructure.Presistence.Repositories
             return true;
         }
 
+        public async Task<bool> RemoveFromCartAsync(int userId, int productId)
+        {
+            var cart = await _context.Carts
+                .Include(c => c.Items)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart != null)
+            {
+                var cartItem = cart.Items.FirstOrDefault(item => item.ProductId == productId);
+                if (cartItem != null)
+                {
+                    _context.CartItems.Remove(cartItem);
+
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public async Task<IEnumerable<CartItem>> GetCartItemsAsync(int userId)
         {
             var cartItems = await _context.CartItems

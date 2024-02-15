@@ -15,7 +15,7 @@
             </div>
             <div class="item-remove">
               <h1>{{ product.price | currency}}</h1>
-              <button class="remove" mat-mini-fab color="warn">
+              <button class="remove" mat-mini-fab color="warn" (click)="removeFromCart(product)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
@@ -29,6 +29,7 @@
           <div class="products-link">
             <a mat-button (click)="goToProducts()">Back</a>
           </div>
+          <h1>Total: {{cartTotalItem$ | async | currency}}</h1>
           <button
             mat-raised-button
             color="primary"

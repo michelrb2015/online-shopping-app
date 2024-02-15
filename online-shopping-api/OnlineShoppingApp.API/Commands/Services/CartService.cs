@@ -16,6 +16,10 @@ namespace OnlineShoppingApp.API.Commands.Services
         {
             return await _cartRepository.AddToCartAsync(userId, productId);
         }
+        public async Task<bool> RemoveFromCartAsync(int userId, int productId)
+        {
+            return await _cartRepository.RemoveFromCartAsync(userId, productId);
+        }
 
         public async Task<IEnumerable<CartItem>> GetCartItemsAsync(int userId)
         {

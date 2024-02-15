@@ -11,7 +11,6 @@ namespace OnlineShoppingApp.Domain.Entities
 
         [Column(TypeName = "decimal(5, 2)")]
         public decimal Price { get; set; }
-        public int Quantity { get; set; }
         public ICollection<OrderProduct> OrderProducts { get; set; }
 
     }

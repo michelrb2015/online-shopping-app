@@ -15,9 +15,9 @@ export class CartEffects {
 
   addToCart$ = createEffect(() => this.actions$.pipe(
     ofType(CartActions.addToCart),
-    switchMap(({ product }) =>
-      this.cartService.addToCart(product).pipe(
-        map(() => ({ type: 'NO_ACTION' })),
+    switchMap(({ product, userId }) =>
+      this.cartService.addToCart(product, userId).pipe(
+        map(() => product),
         catchError(error => of(console.error(error)))
       )
     )
@@ -25,9 +25,9 @@ export class CartEffects {
 
   removeFromCart$ = createEffect(() => this.actions$.pipe(
     ofType(CartActions.removeFromCart),
-    switchMap(({ productId }) =>
-      this.cartService.removeFromCart(productId).pipe(
-        map(() => ({ type: 'NO_ACTION' })),
+    switchMap(({ product, userId }) =>
+      this.cartService.removeFromCart(product, userId).pipe(
+        map(() => product),
         catchError(error => of(console.error(error)))
       )
     )

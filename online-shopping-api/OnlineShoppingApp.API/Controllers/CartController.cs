@@ -53,11 +53,38 @@ namespace OnlineShoppingApp.API.Controllers
                 var addtoCartResult = await _mediator.Send(addToCartCommand);
                 if (addtoCartResult)
                 {
-                    return Ok("Product added to cart successfully.");
+                    return Ok(new { Message = "Product added to cart successfully." });
                 }
                 else
                 {
-                    return BadRequest("Failed to add product to cart.");
+                    return BadRequest(new { Message = "Failed to add product to cart." });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpPost("remove")]
+        public async Task<IActionResult> RemoveFromCart([FromBody] AddToCartDto cartDto)
+        {
+            try
+            {
+                var removeFromCartCommand = new RemoveFromCartCommand()
+                {
+                    UserId = cartDto.UserId,
+                    ProductId = cartDto.ProductId
+                };
+
+                var removeFromCartResult = await _mediator.Send(removeFromCartCommand);
+                if (removeFromCartResult)
+                {
+                    return Ok(new { Message = "Product removed from cart successfully." });
+                }
+                else
+                {
+                    return BadRequest(new { Message = "Failed to remove product from cart." });
                 }
             }
             catch (Exception ex)
